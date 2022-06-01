@@ -35,7 +35,7 @@ function App() {
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
       {items.map(({ id }) => (
-        <Tabs style={{ width: "100px" }} tabIndex={0} itemId={id}>
+        <Tabs style={{ width: "100px" }} tabIndex={0} itemID={id} key={id}>
           <TabPane tab={`Tab-${id}`} key={id}>
           </TabPane>
         </Tabs>
