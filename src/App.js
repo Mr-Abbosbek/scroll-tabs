@@ -1,8 +1,11 @@
 import React from "react";
-import { Tabs } from "antd";
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
+import {
+  ScrollMenu,
+  VisibilityContext,
+} from "@ramirezcgn/react-horizontal-scrolling-menu";
+
 import "./App.css";
-const { TabPane } = Tabs;
+import { NavLink } from "react-router-dom";
 
 const getItems = () =>
   Array(25)
@@ -17,28 +20,29 @@ function Arrow({ children, disabled, onClick }) {
       style={{
         cursor: "pointer",
         opacity: disabled ? "0" : "1",
-        height: "40px",
+        height: "80px",
         outline: "none",
         background: "none",
         border: "none",
-        fontWeight: "900"
+        fontWeight: "900",
       }}
     >
       {children}
     </button>
   );
 }
-
 function App() {
   const [items] = React.useState(getItems);
 
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-      {items.map(({ id }) => (
-        <Tabs style={{ width: "100px" }} tabIndex={0} itemID={id} key={id}>
-          <TabPane tab={`Tab-${id}`} key={id}>
-          </TabPane>
-        </Tabs>
+      {items.map(({ id, i }) => (
+        <Card
+          itemId={id} // NOTE: itemId is required for track items
+          itemClassName={i % 2 ? "odd" : "even"} // Optional custom class for item container element
+          title={id}
+          key={id}
+        />
       ))}
     </ScrollMenu>
   );
@@ -62,6 +66,25 @@ function RightArrow() {
     <Arrow disabled={isLastItemVisible} onClick={() => scrollNext()}>
       {`>`}
     </Arrow>
+  );
+}
+
+function Card({ itemId, title }) {
+
+  return (
+    <div
+      style={{
+        width: "160px",
+      }}
+      tabIndex={0}
+    >
+      <nav className="nav">
+        <button className="nav-item is-active" active-color="orange">
+          Tab-{itemId}
+        </button>
+        <span className="nav-indicator"></span>
+      </nav>
+    </div>
   );
 }
 
