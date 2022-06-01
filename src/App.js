@@ -5,7 +5,6 @@ import {
 } from "@ramirezcgn/react-horizontal-scrolling-menu";
 
 import "./App.css";
-import { NavLink } from "react-router-dom";
 
 const getItems = () =>
   Array(25)
